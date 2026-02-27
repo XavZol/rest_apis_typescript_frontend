@@ -78,7 +78,7 @@ export default function EditProduct() {
                         name="availability"
                         defaultValue={product?.availability.toString()}
                     >
-                        {availabilityOptions.map(option => (
+                        {availabilityOptions?.map(option => (
                             <option key={option.name} value={option.value.toString()}>{option.name}</option>
                         ))}
                     </select>
