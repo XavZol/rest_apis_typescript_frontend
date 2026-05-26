@@ -14,3 +14,15 @@ export const ProductSchema = object({
 })
 export const ProductsSchema = array(ProductSchema)
 export type Product = InferOutput<typeof ProductSchema>
+
+export type Pagination = {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+}
+
+export type PaginatedProducts = {
+    products: Product[]
+    pagination: Pagination
+}

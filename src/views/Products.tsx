@@ -1,13 +1,14 @@
-import { Link, useLoaderData, type ActionFunctionArgs } from 'react-router-dom'
+import { Link, useLoaderData, type ActionFunctionArgs, type LoaderFunctionArgs } from 'react-router-dom'
 import { getProducts, updatedProductAvailability } from '../services/ProductServices'
 import ProductDetails from '../components/ProductDetails'
 import type { Product } from '../types'
 
-export async function loader() {
-    const products = await getProducts()
-    return products
+export async function loader({ request }: LoaderFunctionArgs) {
+    const url = new URL(request.url)
+    const page = parseInt(url.searchParams.get('page') || '1')
+    const result = await getProducts(page)
+    return result ?? { products: [], pagination: { total: 0, page: 1, limit: 5, totalPages: 1 } }
 }
-
 export async function action({request} : ActionFunctionArgs) {
     const data = Object.fromEntries(await request.formData())
     await updatedProductAvailability(+data.id)
