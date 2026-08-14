@@ -11,7 +11,7 @@ export async function addProduct(data: ProductData) {
     try {
         const result = safeParse(DraftProductSchema, {
             name: data?.name,
-            price: +d0ata?.price
+            price: +data?.price
         })
         if(result.success) {
             const url = `/api/products`
