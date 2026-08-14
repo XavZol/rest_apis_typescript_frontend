@@ -10,8 +10,8 @@ type ProductData = {
 export async function addProduct(data: ProductData) {
     try {
         const result = safeParse(DraftProductSchema, {
-            name: data.name,
-            price: +data.price
+            name: data?.name,
+            price: +d0ata?.price
         })
         if(result.success) {
             const url = `/api/products`
